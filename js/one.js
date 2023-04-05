@@ -18,11 +18,10 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1600, 800);
+  createCanvas(400, 400);
   slider = createSlider(0, 1, 0.5, 0.01)
-  button = createButton('Pause');
+  button = createButton('Play/Pause');
   button.mousePressed(toggleSong);
-  song.play();
   amp = new p5.Amplitude();
 }
 
@@ -35,7 +34,7 @@ function draw() {
   noFill();
   beginShape();
   for (var i = 0; i < volhistory.length; i++){
-    var y = map(volhistory[i], 0, 1, height/2, 0);
+    var y = map(volhistory[i], 0, 1, height/1.5, 0);
     vertex(i, y);
   }
   endShape();
