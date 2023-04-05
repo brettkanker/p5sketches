@@ -1,6 +1,7 @@
 var song;
 var amp;
 var button;
+var slider;
 
 var volhistory = [];
 
@@ -18,6 +19,7 @@ function preload() {
 
 function setup() {
   createCanvas(1600, 800);
+  slider = createSlider(0, 1, 0.5, 0.01)
   button = createButton('Pause');
   button.mousePressed(toggleSong);
   song.play();
@@ -26,6 +28,7 @@ function setup() {
 
 function draw() {
   background(0);
+  song.setVolume(slider.value())
   var vol = amp.getLevel();
   volhistory.push(vol);
   stroke(255);
