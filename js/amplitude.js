@@ -14,7 +14,7 @@ function toggleSong() {
 }
 
 function preload() {
-  song = loadSound("../assets/Yellow_Swans-Sovereign.mp3");
+  song = loadSound("/assets/Yellow_Swans-Sovereign.mp3");
 }
 
 function setup() {
