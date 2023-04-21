@@ -1,7 +1,7 @@
 let img;
 
 function preload() {
-  img = loadImage("/assets/soviet_submarine.jpg");
+  img = loadImage("/assets/submarine.jpg");
 }
 
 function setup() {
