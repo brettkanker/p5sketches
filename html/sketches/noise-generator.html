@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sketch 3</title>
+    <title>Noise generator</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        
+        canvas {
+          display: block;
+          margin: 0 auto;
+          border: 1px solid black;
+        }
+        
+        #color-buttons, #shape-buttons, #noise-button {
+          text-align: center;
+          margin: 10px auto;
+        }
+        
+        button {
+          margin: 5px;
+          padding: 5px 10px;
+          background-color: #fff;
+          border: 1px solid black;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div id="color-buttons"></div>
+    <div id="shape-buttons"></div>
+    <div id="noise-button"></div>
     <script src="../../js/p5.min.js"></script>
     <script src="../../js/p5.sound.min.js"></script>
     <script src="../../js/noise-generator.js"></script>
