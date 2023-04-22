@@ -11,7 +11,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
   let x1 = floor(random(img.width));
   let x2 = floor(random(img.width));
   let y1 = floor(random(img.height));
