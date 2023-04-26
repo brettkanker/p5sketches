@@ -14,14 +14,56 @@ const NORTHWEST = 7;
 // An array to store previous positions of the shape
 let positions = [];
 
+let shapeType = 'points'; // default shape type
+
 function setup() {
   let canvas = createCanvas(800, 600);
   canvas.style('border', '2px solid red');
+  canvas.style('position', 'absolute');
+  canvas.style('top', '40px');
+  canvas.style('left', '10px');
+
+  // create buttons
+  let pointsBtn = createButton('Points');
+  pointsBtn.mouseClicked(() => { shapeType = 'points'; });
+  pointsBtn.style('position', 'absolute');
+  pointsBtn.style('top', '10px');
+  pointsBtn.style('left', '10px');
+
+  let circlesBtn = createButton('Circles');
+  circlesBtn.mouseClicked(() => { shapeType = 'circles'; });
+  circlesBtn.style('position', 'absolute');
+  circlesBtn.style('top', '10px');
+  circlesBtn.style('left', '80px');
+
+  let squaresBtn = createButton('Squares');
+  squaresBtn.mouseClicked(() => { shapeType = 'squares'; });
+  squaresBtn.style('position', 'absolute');
+  squaresBtn.style('top', '10px');
+  squaresBtn.style('left', '160px');
+
   // Initialize position and direction randomly
   xPos = random(width);
   yPos = random(height);
-  xDir = random(-5, 5); //floor/cealing/int
-  yDir = random(-5, 5);
+  const dir = floor(random(4)); // choose one of the four diagonal directions
+  switch (dir) {
+    case 0: // northeast
+      xDir = 5;
+      yDir = -5;
+      break;
+    case 1: // southeast
+      xDir = 5;
+      yDir = 5;
+      break;
+    case 2: // southwest
+      xDir = -5;
+      yDir = 5;
+      break;
+    case 3: // northwest
+      xDir = -5;
+      yDir = -5;
+      break;
+  }
 }
 
 function draw() {
@@ -30,18 +72,29 @@ function draw() {
   // Add the current position to the positions array
   positions.push(createVector(xPos, yPos));
 
-  // Draw the line using the positions array
-  stroke(0, 0, 0, 100);
-  strokeWeight(4);
-  noFill();
-//   beginShape();
-//   for (let i = 0; i < positions.length; i++) {
-//     vertex(positions[i].x, positions[i].y);
-//   }
-//   endShape();
-  for (let i = 0; i < positions.length; i++) {
-    point(positions[i].x, positions[i].y);
-    // ellipse(positions[i].x, positions[i].y, 50);
+  // Draw the shape based on shapeType
+  
+  if (shapeType === 'points') {
+    for (let i = 0; i < positions.length; i++) {
+      noFill();
+      stroke(0, 0, 0, 100);
+      strokeWeight(4);
+      point(positions[i].x, positions[i].y);
+    }
+  } else if (shapeType === 'circles') {
+    for (let i = 0; i < positions.length; i++) {
+      noFill();
+      stroke(0, 0, 0, 100);
+      strokeWeight(1);
+      ellipse(positions[i].x, positions[i].y, 50);
+    }
+  } else if (shapeType === 'squares') {
+    for (let i = 0; i < positions.length; i++) {
+      fill(255);
+      stroke(0, 0, 0, 100);
+      strokeWeight(2);
+      rect(positions[i].x, positions[i].y, 25, 25);
+    }
   }
 
   // Move the shape based on direction
