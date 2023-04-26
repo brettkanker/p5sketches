@@ -19,8 +19,13 @@ function draw() {
   background(0);
   image(dvd, x, y);
 
-  x += xspeed * mouseX * 0.01;
-  y += yspeed * mouseY * 0.01;
+  x += xspeed;
+  y += yspeed;
+
+  if(mouseIsPressed){
+    x += xspeed * mouseX * 0.01;
+    y += yspeed * mouseY * 0.01;
+  }
 
   if (x + dvd.width >= width || x <= 0) {
     xspeed *= -1;

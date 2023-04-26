@@ -9,6 +9,7 @@ a {
 
 
 /* Patterns */
+
 #fractal {
     position: relative;
     color: black;
@@ -168,5 +169,47 @@ a {
     background-size: cover;
     background-position: center;
     filter: blur(2px);
+    z-index: -1;
+}
+
+/* Agents */
+
+#dvd {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#dvd::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/dvd.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px);
+    z-index: -1;
+}
+
+#directions {
+    position: relative;
+    color: black;
+    z-index: 1; 
+}
+
+#directions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/directions.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
     z-index: -1;
 }
