@@ -256,3 +256,45 @@ a {
     filter: blur(2px);
     z-index: -1;
 }
+
+/* Markov chains */
+
+#shakespeare {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#shakespeare::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/shakespeare.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    z-index: -1;
+}
+
+#word-cloud {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#word-cloud::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/word-cloud.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    z-index: -1;
+}
