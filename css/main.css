@@ -153,6 +153,48 @@ a {
     z-index: -1;
 }
 
+/* Sound */
+
+#amplitude {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#amplitude::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/amplitude.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    z-index: -1;
+}
+
+#noise-generator {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#noise-generator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/noise-generator.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(1px);
+    z-index: -1;
+}
+
 /* Agents */
 
 #dvd {
