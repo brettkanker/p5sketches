@@ -1,5 +1,5 @@
 function setup(){
-    createCanvas(1600, 1000);
+    createCanvas(800, 800);
     strokeWeight(10);
 }
 
@@ -15,9 +15,9 @@ function draw(){
 
         // Purple and cyan
         stroke(190, 34, 201);
-        line(0, i, width, i);
+        line(width / 2, i, width, i);
 
-        stroke(0, 255, 2);
-        line(i, 0, i, height);
+        stroke(0, 255, 255);
+        line(i, height / 2, i, height);
     }
 }
