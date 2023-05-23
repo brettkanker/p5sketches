@@ -1,3 +1,6 @@
+// Base code taken from unknown pleasures - animating by amcc
+// https://editor.p5js.org/amcc/sketches/M58whsEhW
+
 let spread;
 let inc;
 let margin;
@@ -13,7 +16,7 @@ let ySpacing = 2.6
 let offset = 0;
 let offsetInc = 0
 let rowOffset = 40
-let lineMultiplier = 27
+let lineMultiplier = 0
 
 // fuzz settings
 let fuzzOffset = 1000;
@@ -50,8 +53,7 @@ function draw() {
   }
 
   let level = amplitude.getLevel(); // Get the current audio level
-  offsetInc = level * 2;
-//   fuzzOffset = level * 1000;
+  lineMultiplier = level * 100; // Amply noise with the audio level
 
   // make rows
   for (let y = 0; y <= 50 * ySpacing; y += ySpacing) {
