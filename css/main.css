@@ -462,6 +462,26 @@ a {
     z-index: -1;
 }
 
+#my-game-of-life {
+    position: relative;
+    color: white;
+    z-index: 1; 
+}
+
+#my-game-of-life::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background/my-game-of-life.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    z-index: -1;
+}
+
 /* Other */
 
 #abstract-circles {
