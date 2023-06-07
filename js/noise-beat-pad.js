@@ -4,6 +4,20 @@ let perlin;
 let audioContext;
 let gainNode;
 
+// Define an array of color combinations
+let colorCombinations = [
+  ["#FF4136", "#0074D9"],
+  ["#2ECC40", "#FFDC00"],
+  ["#B10DC9", "#FF851B"],
+  ["#F012BE", "#3D9970"],
+  ["#FF4136", "#FF851B"],
+  ["#0074D9", "#3D9970"],
+  ["#2ECC40", "#B10DC9"],
+  ["#FFDC00", "#F012BE"],
+  ["#3D9970", "#0074D9"]
+];
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -113,6 +127,12 @@ function generateNoiseGrid(gridIndex, audioData) {
 
   let noiseScale = 0.01; // Scale factor for the Perlin noise
 
+  // Get the color combination for the current grid
+  let colorIndex = gridIndex % colorCombinations.length;
+  let colorCombination = colorCombinations[colorIndex];
+  let color1 = color(colorCombination[0]);
+  let color2 = color(colorCombination[1]);
+
   // Iterate over each pixel within the current grid cell
   for (let x = 0; x < cellSize; x++) {
     for (let y = 0; y < cellSize; y++) {
@@ -125,17 +145,18 @@ function generateNoiseGrid(gridIndex, audioData) {
         // Get the Perlin noise value at the current coordinates scaled by noiseScale
         let noiseValue = perlin.get(actualX * noiseScale, actualY * noiseScale);
 
-        // Map the Perlin noise value to a color value between 0 and 255
-        let colorValue = map(noiseValue, 0, 1, 0, 255);
+        // Interpolate between the two colors based on the Perlin noise value
+        let colorValue = lerpColor(color1, color2, noiseValue);
 
         // Set the color of the current pixel
-        set(actualX, actualY, color(colorValue));
+        set(actualX, actualY, colorValue);
 
-        // Map the Perlin noise value to a frequency value between 20 and 2000 Hz
-        let frequency = map(noiseValue, 0, 1, 20, 1600);
-
-        // Add the frequency to the audioData array
-        audioData.push(frequency);
+        // Map the Perlin noise value and color value to a frequency value between 20 and 2000 Hz
+        let frequency = map(noiseValue, 0, 1, 20, 2000);
+        let colorFrequency = map(red(colorValue), 0, 255, 100, 500);
+        
+        // Add the combined frequency to the audioData array
+        audioData.push(frequency + colorFrequency);
       }
     }
   }
@@ -151,18 +172,18 @@ function playSound(gridIndex) {
   // Generate the Perlin noise and populate the audioData array for the specified grid cell
   generateNoiseGrid(gridIndex, audioData);
 
-  // Create an audio buffer with the audio data
-  let buffer = audioContext.createBuffer(1, audioData.length, audioContext.sampleRate);
-  let channelData = buffer.getChannelData(0);
+  // Create an AudioBuffer
+  let audioBuffer = audioContext.createBuffer(1, audioData.length, audioContext.sampleRate);
+  let channelData = audioBuffer.getChannelData(0);
   for (let i = 0; i < audioData.length; i++) {
     channelData[i] = audioData[i];
   }
 
   // Create a buffer source node and connect it to the gain node
   let source = audioContext.createBufferSource();
-  source.buffer = buffer;
+  source.buffer = audioBuffer;
   source.connect(gainNode);
-
+1
   // Fade in the sound with attack time of 0.2 seconds
   gainNode.gain.setValueAtTime(0, audioContext.currentTime);
   gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
@@ -179,3 +200,4 @@ function playSound(gridIndex) {
   gainNode.gain.setValueAtTime(1, audioContext.currentTime + duration);
   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration + 0.2);
 }
+
