@@ -3,7 +3,7 @@
 let perlin;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
   
   perlin = {
     // Define a function to generate a random vector
@@ -69,26 +69,48 @@ function setup() {
   perlin.seed();
   
   // Generate the Perlin noise and display it on the canvas
-  generateNoise();
+  generateNoiseGrid();
 }
 
-function generateNoise(noiseSca) {
-  let noiseScale = 0.01;
+function generateNoiseGrid() {
+  let gridSize = 3; // Number of grid cells in each row and column
+  let padding = 20; // Distance between each grid
+  let cellSize = (min(width, height) - padding * (gridSize - 1)) / gridSize; // Calculate the size of each grid cell
   
-  // Iterate over each pixel in the canvas
-  for (let x = 0; x < width; x++) {
-    for (let y = 0; y < height; y++) {
-      // Get the Perlin noise value at the current coordinates scaled by noiseScale
-      let noiseValue = perlin.get(x * noiseScale, y * noiseScale);
+  // Iterate over each grid cell in the grid
+  for (let gridX = 0; gridX < gridSize; gridX++) {
+    for (let gridY = 0; gridY < gridSize; gridY++) {
+      // Calculate the offset of the current grid cell
+      let offsetX = (cellSize + padding) * gridX;
+      let offsetY = (cellSize + padding) * gridY;
       
-      // Map the Perlin noise value to a color value between 0 and 255
-      let colorValue = map(noiseValue, 0, 1, 0, 255);
+      let noiseScale = 0.01; // Scale factor for the Perlin noise
       
-      // Set the color of the current pixel
-      set(x, y, color(colorValue));
+      // Iterate over each pixel within the current grid cell
+      for (let x = 0; x < cellSize; x++) {
+        for (let y = 0; y < cellSize; y++) {
+          // Calculate the actual coordinates within the canvas
+          let actualX = offsetX + x;
+          let actualY = offsetY + y;
+          
+          // Check if the current pixel is within the canvas bounds
+          if (actualX < width && actualY < height) {
+            // Get the Perlin noise value at the current coordinates scaled by noiseScale
+            let noiseValue = perlin.get(actualX * noiseScale, actualY * noiseScale);
+            
+            // Map the Perlin noise value to a color value between 0 and 255
+            let colorValue = map(noiseValue, 0, 1, 0, 255);
+            
+            // Set the color of the current pixel
+            set(actualX, actualY, color(colorValue));
+          }
+        }
+      }
     }
   }
   
-  // Update the canvas with the generated Perlin noise
-  updatePixels();
+  updatePixels(); // Update the canvas with the generated Perlin noise grid
 }
+
+
+
