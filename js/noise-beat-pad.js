@@ -93,11 +93,11 @@ function setup() {
 
 function keyPressed() {
   // Check the key code to determine which grid cell to play the sound for
-  if (key === "1") {
+  if (key === "7") {
     playSound(0);
-  } else if (key === "2") {
+  } else if (key === "8") {
     playSound(1);
-  } else if (key === "3") {
+  } else if (key === "9") {
     playSound(2);
   } else if (key === "4") {
     playSound(3);
@@ -105,11 +105,11 @@ function keyPressed() {
     playSound(4);
   } else if (key === "6") {
     playSound(5);
-  } else if (key === "7") {
+  } else if (key === "1") {
     playSound(6);
-  } else if (key === "8") {
+  } else if (key === "2") {
     playSound(7);
-  } else if (key === "9") {
+  } else if (key === "3") {
     playSound(8);
   }
 }
